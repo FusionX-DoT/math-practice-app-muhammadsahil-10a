@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SAHIL MATH TERMINAL</title>
+    <style>
+        body {
+            background-color: #050505;
+            color: #00f2ff;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Glitchy Terminal Box */
+        #terminal {
+            border: 2px solid #00f2ff;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
+            border-radius: 10px;
+            width: 350px;
+            position: relative;
+        }
+
+        h1 { font-size: 1.2rem; letter-spacing: 4px; margin-bottom: 30px; }
+        
+        #problem { 
+            font-size: 60px; 
+            color: #ff00ff; 
+            margin: 20px 0; 
+            font-weight: bold;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+
+        input {
+            width: 120px;
+            font-size: 32px;
+            background: #000;
+            border: 1px solid #00f2ff;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        button {
+            background: #00f2ff;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+        }
+
+        #msg { margin-top: 20px; font-weight: bold; height: 24px; font-size: 14px; }
+
+        /* THE SIGNATURE - Made By Muhammad Sahil 10-A */
+        .credit {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 242, 255, 0.2);
+            font-size: 11px;
+            color: #00f2ff;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; text-shadow: 0 0 8px #00f2ff; }
+            100% { opacity: 0.4; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="terminal">
+        <h1>MATH CORE v3.0</h1>
+        
+        <div id="problem">? x ?</div>
+        
+        <input type="number" id="userInp" placeholder="0" autofocus>
+        <br>
+        <button onclick="verifyAnswer()">Execute Calculation</button>
+        
+        <div id="msg"></div>
+
+        <div class="credit">
+            Made By Muhammad Sahil 10-A
+        </div>
+    </div>
+
+    <script>
+        var val1, val2, answer;
+
+        function nextQ() {
+            val1 = Math.floor(Math.random() * 12) + 1;
+            val2 = Math.floor(Math.random() * 12) + 1;
+            answer = val1 * val2;
+            document.getElementById('problem').innerHTML = val1 + " x " + val2;
+            document.getElementById('userInp').value = "";
+            document.getElementById('msg').innerHTML = "SYSTEM READY";
+            document.getElementById('msg').style.color = "#00f2ff";
+            document.getElementById('userInp').focus();
+        }
+
+        function verifyAnswer() {
+            var input = document.getElementById('userInp').value;
+            if (input == "") return;
+
+            if (parseInt(input) === answer) {
+                document.getElementById('msg').innerHTML = "MATCH FOUND: UPDATING...";
+                document.getElementById('msg').style.color = "#00ff00";
+                setTimeout(nextQ, 800);
+            } else {
+                document.getElementById('msg').innerHTML = "DATA MISMATCH: RETRY";
+                document.getElementById('msg').style.color = "#ff0000";
+            }
+        }
+
+        // Allow 'Enter' key to work
+        document.getElementById('userInp').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') verifyAnswer();
+        });
+
+        nextQ();
+    </script>
+</body>
+</html>
